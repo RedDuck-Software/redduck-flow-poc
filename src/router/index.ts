@@ -1,8 +1,13 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import { MainLayout } from '../layouts/main-layout.tsx';
-import { MainPage } from '../pages/main-page.tsx';
-import { SecondPage } from '../pages/second-page.tsx';
+import { NavigateToIndex } from '@/router/NavigateToIndex.tsx';
+
+const MainLayout = lazy(() => import('@/layouts/main-layout.tsx'));
+const MainPage = lazy(() => import('@/pages/main-page.tsx'));
+const Marketplace = lazy(() => import('@/pages/marketplace.tsx'));
+const EditFlow = lazy(() => import('@/pages/edit-flow.tsx'));
+const MarketplaceView = lazy(() => import('@/pages/marketplace-view.tsx'));
 
 export const router = createBrowserRouter([
   {
@@ -14,9 +19,21 @@ export const router = createBrowserRouter([
         Component: MainPage,
       },
       {
-        path: '/second-page',
-        Component: SecondPage,
+        path: '/marketplace',
+        Component: Marketplace,
+      },
+      {
+        path: '/flows/:id',
+        Component: EditFlow,
+      },
+      {
+        path: '/marketplace/:id',
+        Component: MarketplaceView,
       },
     ],
+  },
+  {
+    path: '*',
+    Component: NavigateToIndex,
   },
 ]);

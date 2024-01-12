@@ -18,9 +18,9 @@ const { chains, publicClient } = configureChains(SUPPORTED_CHAINS, [
 ]);
 
 const metadata = {
-  name: 'Insanity Casino',
-  description: 'Insanity Casino Example',
-  url: 'https://web3modal.com',
+  name: 'Redduck Flow POC',
+  description: 'Proof of Concept for Redduck Flow project',
+  url: 'https://redduck-flow-poc.netlify.app',
 };
 
 const wagmiConfig = createConfig({
@@ -41,7 +41,7 @@ const wagmiConfig = createConfig({
 });
 
 // 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId, chains });
+createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' });
 
 export const WagmiProvider = ({ children }: PropsWithChildren) => {
   return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>;

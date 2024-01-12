@@ -1,20 +1,29 @@
-import { Link, Outlet } from 'react-router-dom';
-import { useAccount } from 'wagmi';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 
-export const MainLayout = () => {
-  const { address } = useAccount();
+import { DefaultMeta } from '@/components/meta';
+import { Navbar } from '@/components/navbar';
+
+const MainLayout = () => {
+  useEffect(() => {
+    const node = document.querySelector(
+      '.react-flow__panel.react-flow__attribution',
+    );
+
+    if (node) {
+      node.remove();
+    }
+  }, []);
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex gap-2">
-        <w3m-button size="sm" />
-        <div>Connected Wallet: {address ?? 'none'}</div>
-      </div>
-      <div className="flex gap-2">
-        <Link to="/">Main Page</Link>
-        <Link to="/second-page">Second Page</Link>
-      </div>
-      <Outlet />
-    </div>
+    <>
+      <DefaultMeta />
+      <main className="flex h-full flex-col gap-8 pb-8">
+        <Navbar />
+        <Outlet />
+      </main>
+    </>
   );
 };
+
+export default MainLayout;
